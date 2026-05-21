@@ -2,7 +2,7 @@
 
 ## Deployed URL
 
-TBD
+https://tcss460-g9.vercel.app/
 
 ## Backend Partner
 
