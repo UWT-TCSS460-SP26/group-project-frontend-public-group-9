@@ -3,6 +3,7 @@ import 'next-auth/jwt';
 
 declare module 'next-auth' {
     interface Session {
+        error?: string,
         accessToken?: string;
         idToken?: string;
         accessTokenExpires?: number;

@@ -35,12 +35,55 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     callbacks: {
         async jwt({ token, account }) {
             if (account) {
-                token.accessToken = account.access_token;
-                token.idToken = account.id_token;
-                token.accessTokenExpires = account.expires_at ? account.expires_at * 1000 : undefined;
+                // Initial sign-in
+                return {
+                ...token,
+                accessToken: account.access_token,
+                refreshToken: account.refresh_token,
+                accessTokenExpires: account.expires_at ? account.expires_at * 1000 : undefined, // ms since epoch
+                };
             }
-            return token;
-        },
+
+            // Subsequent calls — check if the access token has expired.
+            if (token.accessTokenExpires && Date.now() < token.accessTokenExpires) {
+                return token; // still valid
+            }
+
+            // Expired — try to refresh.
+            if (!token.refreshToken) {
+                token.error = 'RefreshTokenError';
+                return token;
+            }
+
+            try {
+                const response = await fetch(`${process.env.AUTH_TCSS460_ISSUER}/v2/oauth/token`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({
+                        grant_type: 'refresh_token',
+                        refresh_token: token.refreshToken as string,
+                        client_id: process.env.AUTH_TCSS460_CLIENT_ID!,
+                        client_secret: process.env.AUTH_TCSS460_CLIENT_SECRET!,
+                    }),
+                });
+
+                const newTokens = await response.json();
+                if (!response.ok) throw newTokens;
+
+                return {
+                ...token,
+                accessToken: newTokens.access_token,
+                accessTokenExpires: Date.now() + newTokens.expires_in * 1000,
+                // Some IdPs rotate the refresh token, some don't. Keep the new one if present.
+                refreshToken: newTokens.refresh_token ?? token.refreshToken,
+                error: undefined,
+                };
+            } catch (error) {
+                console.error('Refresh failed:', error);
+                token.error = 'RefreshTokenError';
+                return token;
+            }
+            },
         async session({ session, token }) {
             session.accessToken = token.accessToken;
             session.idToken = token.idToken;
