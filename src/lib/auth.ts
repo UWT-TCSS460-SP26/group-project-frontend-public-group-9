@@ -46,7 +46,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             session.idToken = token.idToken;
             session.accessTokenExpires = token.accessTokenExpires;
             // `token.sub` is set by Auth.js from the OIDC id_token's `sub` claim.
-            // ⚠ FOOTGUN: this is NOT necessarily the same as the access_token's `sub`,
+            // WARNING: this is NOT necessarily the same as the access_token's `sub`,
             // and `backend-3` keys local user rows off the access_token sub (via
             // `resolveLocalUser`). For "is this resource mine?" checks against the
             // backend, decode `session.accessToken` directly — see `useMyLocalUserId`.
