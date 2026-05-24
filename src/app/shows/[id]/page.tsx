@@ -2,33 +2,33 @@ import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/lib/auth';
-import { partnerUrls, type MovieSummary } from '@/lib/partnerApi';
+import { partnerUrls, type ShowSummary } from '@/lib/partnerApi';
 
 type DetailsPageProps = {
     params: Promise<{ id: string }>;
 };
 
-export default async function MovieDetailsPage({ params }: DetailsPageProps) {
+export default async function ShowDetailsPage({ params }: DetailsPageProps) {
     const { id } = await params;
 
     const session = await auth();
     if (!session?.accessToken) {
-        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/movies/${id}`)}`);
+        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/shows/${id}`)}`);
     }
 
-    const response = await fetch(partnerUrls.movieDetails(id), {
+    const response = await fetch(partnerUrls.showDetails(id), {
         headers: { Authorization: `Bearer ${session.accessToken}` },
         cache: 'no-store',
     });
 
     if (response.status === 401) {
-        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/movies/${id}`)}`);
+        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/shows/${id}`)}`);
     }
 
     if (response.status === 404) {
         return (
             <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                No movie found with id {id}.
+                No show found with id {id}.
             </p>
         );
     }
@@ -37,15 +37,15 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
         throw new Error(`Backend failed: ${response.status} ${response.statusText}`);
     }
 
-    const movie = (await response.json()) as MovieSummary;
+    const show = (await response.json()) as ShowSummary;
 
     return (
         <article className="flex flex-col gap-8 sm:flex-row sm:items-start">
             <div className="relative aspect-[2/3] w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
-                {movie.posterUrl ? (
+                {show.posterUrl ? (
                     <Image
-                        src={movie.posterUrl}
-                        alt={`${movie.title} poster`}
+                        src={show.posterUrl}
+                        alt={`${show.title} poster`}
                         fill
                         sizes="(min-width: 640px) 260px, 100vw"
                         priority
@@ -61,18 +61,18 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
             <div className="flex flex-col gap-4">
                 <header className="flex flex-col gap-1">
                     <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
-                        {movie.title}
+                        {show.title}
                     </h1>
-                    {movie.releaseDate && (
+                    {show.airDate && (
                         <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                            Released {movie.releaseDate}
+                            Aired {show.airDate}
                         </p>
                     )}
                 </header>
 
-                {movie.synopsis && (
+                {show.synopsis && (
                     <p className="text-base leading-7 text-zinc-700 dark:text-zinc-300">
-                        {movie.synopsis}
+                        {show.synopsis}
                     </p>
                 )}
 

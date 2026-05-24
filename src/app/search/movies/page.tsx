@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { UserBadge } from '@/components/AuthButtons';
 import { auth } from '@/lib/auth';
 import { partnerUrls, type MoviePage } from '@/lib/partnerApi';
 
@@ -41,9 +40,14 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
     return (
         <>
-            <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
-                Search movies
-            </h1>
+            <div className="flex flex-row items-center justify-between w-full p-2 text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
+                <h1>
+                    Search movies
+                </h1>
+                <Link href="/search/shows" className="ml-auto px-3 hover:text-black hover:bg-zinc-200 dark:hover:text-white dark:hover:bg-zinc-800">
+                    Shows →
+                </Link>
+            </div>
 
             <form action="/search" method="GET" className="flex gap-2">
                 <input

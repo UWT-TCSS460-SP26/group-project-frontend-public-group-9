@@ -11,7 +11,7 @@ export function SignInButton({ callbackUrl = '/' }: { callbackUrl?: string }) {
 }
 
 export function SignOutButton() {
-    return <button className="px-3 py-3 hover:text-black dark:hover:text-white dark:hover:bg-zinc-800" onClick={() => signOut({ callbackUrl: '/' })}>Sign out</button>;
+    return <button className="px-3 py-3 hover:text-black hover:bg-zinc-200 dark:hover:text-white dark:hover:bg-zinc-800" onClick={() => signOut({ callbackUrl: '/' })}>Sign out</button>;
 }
 
 export function UserBadge() {

@@ -2,9 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { UserBadge } from '@/components/AuthButtons';
 import { auth } from '@/lib/auth';
-import { partnerUrls, type MoviePage } from '@/lib/partnerApi';
+import { partnerUrls, type ShowPage } from '@/lib/partnerApi';
 
 export default async function BrowsePage() {
     const session = await auth();
@@ -12,7 +11,7 @@ export default async function BrowsePage() {
         redirect('/api/auth/signin?callbackUrl=/browse');
     }
 
-    const response = await fetch(partnerUrls.popularMovies(), {
+    const response = await fetch(partnerUrls.popularShows(), {
         headers: { Authorization: `Bearer ${session.accessToken}` },
         cache: 'no-store',
     });
@@ -25,13 +24,18 @@ export default async function BrowsePage() {
         throw new Error(`Backend failed: ${response.status} ${response.statusText}`);
     }
 
-    const data = (await response.json()) as MoviePage;
+    const data = (await response.json()) as ShowPage;
 
     return (
         <>
-            <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
-                Popular movies
-            </h1>
+            <div className="flex flex-row items-center justify-between w-full p-2 text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
+                <h1>
+                    Popular shows
+                </h1>
+                <Link href="/browse/movies" className="ml-auto px-3 hover:text-black hover:bg-zinc-200 dark:hover:text-white dark:hover:bg-zinc-800">
+                    Movies →
+                </Link>
+            </div>
 
             {data.results.length === 0 ? (
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -39,17 +43,17 @@ export default async function BrowsePage() {
                 </p>
             ) : (
                 <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                    {data.results.map((movie) => (
-                        <li key={movie.id}>
+                    {data.results.map((show) => (
+                        <li key={show.id}>
                             <Link
-                                href={`/movies/${movie.id}`}
+                                href={`/shows/${show.id}`}
                                 className="group flex flex-col gap-2"
                             >
                                 <div className="relative aspect-[2/3] w-full overflow-hidden rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
-                                    {movie.posterUrl ? (
+                                    {show.posterUrl ? (
                                         <Image
-                                            src={movie.posterUrl}
-                                            alt={`${movie.title} poster`}
+                                            src={show.posterUrl}
+                                            alt={`${show.title} poster`}
                                             fill
                                             sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
                                             className="object-cover transition-opacity group-hover:opacity-90"
@@ -62,11 +66,11 @@ export default async function BrowsePage() {
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-sm font-medium text-black group-hover:underline dark:text-zinc-50">
-                                        {movie.title}
+                                        {show.title}
                                     </span>
-                                    {movie.releaseDate && (
+                                    {show.airDate && (
                                         <span className="text-xs text-zinc-500 dark:text-zinc-400">
-                                            {movie.releaseDate.slice(0, 4)}
+                                            {show.airDate.slice(0, 4)}
                                         </span>
                                     )}
                                 </div>
