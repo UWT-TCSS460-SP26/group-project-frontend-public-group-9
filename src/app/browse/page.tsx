@@ -28,65 +28,53 @@ export default async function BrowsePage() {
     const data = (await response.json()) as MoviePage;
 
     return (
-        <div className="flex flex-col flex-1 bg-zinc-50 font-sans dark:bg-black">
-            <header className="flex items-center justify-between w-full max-w-5xl mx-auto px-6 py-4 border-b border-zinc-200 dark:border-zinc-800">
-                <Link
-                    href="/"
-                    className="text-sm font-medium text-zinc-700 hover:text-black dark:text-zinc-300 dark:hover:text-white"
-                >
-                    ← Home
-                </Link>
-                <UserBadge />
-            </header>
+        <>
+            <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
+                Popular movies
+            </h1>
 
-            <main className="flex flex-col flex-1 w-full max-w-5xl mx-auto px-6 py-8 gap-6">
-                <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
-                    Popular movies
-                </h1>
-
-                {data.results.length === 0 ? (
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                        Nothing popular right now.
-                    </p>
-                ) : (
-                    <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                        {data.results.map((movie) => (
-                            <li key={movie.id}>
-                                <Link
-                                    href={`/movies/${movie.id}`}
-                                    className="group flex flex-col gap-2"
-                                >
-                                    <div className="relative aspect-[2/3] w-full overflow-hidden rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
-                                        {movie.posterUrl ? (
-                                            <Image
-                                                src={movie.posterUrl}
-                                                alt={`${movie.title} poster`}
-                                                fill
-                                                sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
-                                                className="object-cover transition-opacity group-hover:opacity-90"
-                                            />
-                                        ) : (
-                                            <div className="flex h-full w-full items-center justify-center text-xs text-zinc-500">
-                                                No poster
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-sm font-medium text-black group-hover:underline dark:text-zinc-50">
-                                            {movie.title}
+            {data.results.length === 0 ? (
+                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    Nothing popular right now.
+                </p>
+            ) : (
+                <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    {data.results.map((movie) => (
+                        <li key={movie.id}>
+                            <Link
+                                href={`/movies/${movie.id}`}
+                                className="group flex flex-col gap-2"
+                            >
+                                <div className="relative aspect-[2/3] w-full overflow-hidden rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
+                                    {movie.posterUrl ? (
+                                        <Image
+                                            src={movie.posterUrl}
+                                            alt={`${movie.title} poster`}
+                                            fill
+                                            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
+                                            className="object-cover transition-opacity group-hover:opacity-90"
+                                        />
+                                    ) : (
+                                        <div className="flex h-full w-full items-center justify-center text-xs text-zinc-500">
+                                            No poster
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-sm font-medium text-black group-hover:underline dark:text-zinc-50">
+                                        {movie.title}
+                                    </span>
+                                    {movie.releaseDate && (
+                                        <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                                            {movie.releaseDate.slice(0, 4)}
                                         </span>
-                                        {movie.releaseDate && (
-                                            <span className="text-xs text-zinc-500 dark:text-zinc-400">
-                                                {movie.releaseDate.slice(0, 4)}
-                                            </span>
-                                        )}
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </main>
-        </div>
+                                    )}
+                                </div>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </>
     );
 }
