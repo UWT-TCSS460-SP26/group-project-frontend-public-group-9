@@ -8,6 +8,14 @@ export type MovieSummary = {
     posterUrl: string;
 };
 
+export type ShowSummary = {
+    id: number;
+    title: string;
+    synopsis: string;
+    airDate: string;
+    posterUrl: string;
+};
+
 export type Pagination = {
     page: number;
     totalResults: number;
@@ -19,6 +27,11 @@ export type MoviePage = {
     pagination: Pagination;
 };
 
+export type ShowPage = {
+    results: ShowSummary[];
+    pagination: Pagination;
+};
+
 export const partnerUrls = {
     searchMovies: (title: string, page = 1) =>
         `${BASE_URL}/v1/movie/search?title=${encodeURIComponent(title)}&page=${page}`,
@@ -26,4 +39,10 @@ export const partnerUrls = {
         `${BASE_URL}/v1/movie/popular?page=${page}`,
     movieDetails: (id: string) =>
         `${BASE_URL}/v1/movie/details/${id}`,
+    searchShows: (title: string, page = 1) =>
+        `${BASE_URL}/v1/tv/search?title=${encodeURIComponent(title)}&page=${page}`,
+    popularShows: (page = 1) =>
+        `${BASE_URL}/v1/tv/popular?page=${page}`,
+    showDetails: (id: string) =>
+        `${BASE_URL}/v1/tv/details/${id}`,
 };
