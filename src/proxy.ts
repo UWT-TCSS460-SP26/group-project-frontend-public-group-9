@@ -11,5 +11,5 @@ export default auth((request) => {
 });
 
 export const config = {
-    matcher: ['/search/shows'],
+    matcher: [],
 };
