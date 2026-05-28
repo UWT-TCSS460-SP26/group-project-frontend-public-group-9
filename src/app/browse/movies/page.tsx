@@ -6,19 +6,9 @@ import { auth } from '@/lib/auth';
 import { partnerUrls, type MoviePage } from '@/lib/partnerApi';
 
 export default async function BrowsePage() {
-    const session = await auth();
-    if (!session?.accessToken) {
-        redirect('/api/auth/signin?callbackUrl=/browse');
-    }
-
     const response = await fetch(partnerUrls.popularMovies(), {
-        headers: { Authorization: `Bearer ${session.accessToken}` },
         cache: 'no-store',
     });
-
-    if (response.status === 401) {
-        redirect('/api/auth/signin?callbackUrl=/browse');
-    }
 
     if (!response.ok) {
         throw new Error(`Backend failed: ${response.status} ${response.statusText}`);

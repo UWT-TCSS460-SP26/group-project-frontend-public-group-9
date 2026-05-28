@@ -11,19 +11,9 @@ type DetailsPageProps = {
 export default async function MovieDetailsPage({ params }: DetailsPageProps) {
     const { id } = await params;
 
-    const session = await auth();
-    if (!session?.accessToken) {
-        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/movies/${id}`)}`);
-    }
-
     const response = await fetch(partnerUrls.movieDetails(id), {
-        headers: { Authorization: `Bearer ${session.accessToken}` },
         cache: 'no-store',
     });
-
-    if (response.status === 401) {
-        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/movies/${id}`)}`);
-    }
 
     if (response.status === 404) {
         return (

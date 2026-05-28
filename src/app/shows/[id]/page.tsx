@@ -12,18 +12,10 @@ export default async function ShowDetailsPage({ params }: DetailsPageProps) {
     const { id } = await params;
 
     const session = await auth();
-    if (!session?.accessToken) {
-        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/shows/${id}`)}`);
-    }
 
     const response = await fetch(partnerUrls.showDetails(id), {
-        headers: { Authorization: `Bearer ${session.accessToken}` },
         cache: 'no-store',
     });
-
-    if (response.status === 401) {
-        redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/shows/${id}`)}`);
-    }
 
     if (response.status === 404) {
         return (

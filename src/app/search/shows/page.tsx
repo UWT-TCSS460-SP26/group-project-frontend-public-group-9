@@ -17,19 +17,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     let errorMessage: string | null = null;
 
     if (query) {
-        const session = await auth();
-        if (!session?.accessToken) {
-            redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/search/shows?q=${query}`)}`);
-        }
-
         const response = await fetch(partnerUrls.searchShows(query), {
-            headers: { Authorization: `Bearer ${session.accessToken}` },
             cache: 'no-store',
         });
-
-        if (response.status === 401) {
-            redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(`/search/shows?q=${query}`)}`);
-        }
 
         if (!response.ok) {
             errorMessage = `Search failed (${response.status} ${response.statusText}).`;
