@@ -32,6 +32,42 @@ export type ShowPage = {
     pagination: Pagination;
 };
 
+export type Author = {
+    id: number;
+    subjectId: string;
+    displayName: string;
+};
+
+export type Review = {
+    id: number;
+    mediaId: number;
+    mediaType: 'movie' | 'tv';
+    title: string | null;
+    body: string;
+    createdAt: string;
+    updatedAt: string;
+    author: Author;
+};
+
+export type Rating = {
+    id: number;
+    mediaId: number;
+    mediaType: 'movie' | 'tv';
+    score: number;
+    createdAt: string;
+    updatedAt: string;
+    author: Author;
+};
+
+export type RatingSummary = {
+    mediaId: number;
+    mediaType: 'movie' | 'tv';
+    average: number | null;
+    count: number;
+};
+
+export type MediaType = 'movie' | 'tv';
+
 export const partnerUrls = {
     searchMovies: (title: string, page = 1) =>
         `${BASE_URL}/v1/movie/search?title=${encodeURIComponent(title)}&page=${page}`,
@@ -45,4 +81,14 @@ export const partnerUrls = {
         `${BASE_URL}/v1/tv/popular?page=${page}`,
     showDetails: (id: string) =>
         `${BASE_URL}/v1/tv/details/${id}`,
+    ratingsSummary: (mediaId: string | number, mediaType: MediaType) =>
+        `${BASE_URL}/v1/ratings?mediaId=${mediaId}&mediaType=${mediaType}`,
+    reviews: (mediaId: string | number, mediaType: MediaType) =>
+        `${BASE_URL}/v1/reviews?mediaId=${mediaId}&mediaType=${mediaType}`,
+    ratingsMe: () => `${BASE_URL}/v1/ratings/me?limit=100`,
+    reviewsMe: () => `${BASE_URL}/v1/reviews/me?limit=100`,
+    ratingById: (id: number) => `${BASE_URL}/v1/ratings/${id}`,
+    reviewById: (id: number) => `${BASE_URL}/v1/reviews/${id}`,
+    submitRating: () => `${BASE_URL}/v1/ratings`,
+    submitReview: () => `${BASE_URL}/v1/reviews`,
 };
