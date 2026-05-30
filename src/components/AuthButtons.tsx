@@ -22,7 +22,7 @@ export function SignOutButton() {
 export function UserBadge() {
     const { data: session, status } = useSession();
     if (status === 'loading') return <span className="ml-auto text-sm text-zinc-500 dark:text-zinc-400">Loading…</span>;
-    if (status === 'unauthenticated') return <SignInButton />;
+    if (status === 'unauthenticated') return <span className="ml-auto"><SignInButton /></span>;
     return (
         <div className="ml-auto flex items-center gap-1">
             <Link
