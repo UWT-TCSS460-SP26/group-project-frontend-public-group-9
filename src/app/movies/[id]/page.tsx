@@ -16,7 +16,7 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
     const authHeader: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
 
     const [movieRes, ratingRes, reviewsRes] = await Promise.all([
-        fetch(partnerUrls.movieDetails(id), {cache: 'no-store' }),
+        fetch(partnerUrls.movieDetails(id), { cache: 'no-store' }),
         fetch(partnerUrls.ratingsSummary(id, 'movie'), { cache: 'no-store' }),
         fetch(partnerUrls.reviews(id, 'movie'), { cache: 'no-store' }),
     ]);
