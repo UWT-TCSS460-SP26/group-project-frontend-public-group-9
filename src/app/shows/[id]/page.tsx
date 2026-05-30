@@ -16,7 +16,7 @@ export default async function ShowDetailsPage({ params }: DetailsPageProps) {
     const authHeader: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
 
     const [showRes, ratingRes, reviewsRes] = await Promise.all([
-        fetch(partnerUrls.showDetails(id), { headers: authHeader, cache: 'no-store' }),
+        fetch(partnerUrls.showDetails(id), { cache: 'no-store' }),
         fetch(partnerUrls.ratingsSummary(id, 'tv'), { cache: 'no-store' }),
         fetch(partnerUrls.reviews(id, 'tv'), { cache: 'no-store' }),
     ]);
