@@ -39,7 +39,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 </Link>
             </div>
 
-            <form action="/search" method="GET" className="flex gap-2">
+            <form action="/search/movies" method="GET" className="flex gap-2">
                 <input
                     type="text"
                     name="q"
