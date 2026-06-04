@@ -27,7 +27,7 @@ interface ApiOptions {
  * Use for routes that don't require a token (e.g. `GET /v2/messages`).
  */
 export async function apiGet<T = unknown>(path: string, options?: ApiOptions): Promise<T> {
-    const response = await fetch(`${API_BASE}${path}`, { signal: options?.signal });
+    const response = await fetch(path, { signal: options?.signal });
     if (!response.ok) {
         throw new ApiError(response.status, response.statusText, await response.text());
     }
