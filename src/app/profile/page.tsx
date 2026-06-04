@@ -45,7 +45,7 @@ export default async function ProfilePage() {
     const detailsMap = new Map<string, MediaDetails>(detailsEntries.filter(Boolean) as [string, MediaDetails][]);
 
     return (
-        <div className="flex flex-col gap-10 p-4 sm:p-0">
+        <div className="flex flex-col gap-10 w-full px-2 sm:p-4">
             <header className="flex flex-col gap-1">
                 <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
                     Your profile

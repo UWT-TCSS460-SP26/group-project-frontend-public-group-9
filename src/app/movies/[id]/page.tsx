@@ -64,7 +64,7 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
     }
 
     return (
-        <article className="flex flex-col gap-8 p-4 sm:p-0">
+        <article className="flex flex-col gap-8 p-2 sm:p-4">
             <div className="flex flex-col gap-8 sm:flex-row sm:items-start">
                 <div className="relative aspect-[2/3] w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
                     {movie.posterUrl ? (
