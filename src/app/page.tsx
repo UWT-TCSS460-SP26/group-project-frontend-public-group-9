@@ -1,6 +1,29 @@
 import Link from 'next/link';
+import { partnerUrls, type MoviePage, type ShowPage } from '@/lib/partnerApi';
+import MovieCarousel from '@/components/MovieCarousel';
 
-export default function Home() {
+export default async function Home() {
+    // const movieResponse = await fetch(partnerUrls.popularMovies(), {
+    //     cache: 'no-store',
+    // });
+
+    // if (!movieResponse.ok) {
+    //     throw new Error(`Backend failed: ${movieResponse.status} ${movieResponse.statusText}`);
+    // }
+
+    // const movieData = (await movieResponse.json()) as MoviePage;
+        
+    // const showResponse = await fetch(partnerUrls.popularMovies(), {
+    //     cache: 'no-store',
+    // });
+
+    // if (!showResponse.ok) {
+    //     throw new Error(`Backend failed: ${showResponse.status} ${showResponse.statusText}`);
+    // }
+
+    // const showData = (await showResponse.json()) as ShowPage;
+    
+    
     return (
         <div className="flex flex-col gap-8 p-4 sm:p-0">
             <header className="flex flex-col gap-2">
@@ -12,29 +35,7 @@ export default function Home() {
                 </p>
             </header>
 
-            <div className="flex flex-col gap-3 sm:flex-row">
-                <Link
-                    href="/browse/movies"
-                    className="flex flex-col gap-1 rounded border border-zinc-200 bg-white px-5 py-4 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
-                >
-                    <span className="font-medium text-zinc-900 dark:text-zinc-50">Browse movies</span>
-                    <span className="text-sm text-zinc-500 dark:text-zinc-400">See what&apos;s popular</span>
-                </Link>
-                <Link
-                    href="/browse/shows"
-                    className="flex flex-col gap-1 rounded border border-zinc-200 bg-white px-5 py-4 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
-                >
-                    <span className="font-medium text-zinc-900 dark:text-zinc-50">Browse shows</span>
-                    <span className="text-sm text-zinc-500 dark:text-zinc-400">See what&apos;s popular</span>
-                </Link>
-                <Link
-                    href="/search/movies"
-                    className="flex flex-col gap-1 rounded border border-zinc-200 bg-white px-5 py-4 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-600"
-                >
-                    <span className="font-medium text-zinc-900 dark:text-zinc-50">Search</span>
-                    <span className="text-sm text-zinc-500 dark:text-zinc-400">Find a specific title</span>
-                </Link>
-            </div>
+            <MovieCarousel />
         </div>
     );
 }
