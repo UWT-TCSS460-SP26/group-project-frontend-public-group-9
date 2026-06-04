@@ -11,10 +11,6 @@ export default function Home() {
                 <p className="text-base text-zinc-600 dark:text-zinc-400">
                     Rate and review movies and TV shows.
                 </p>
-                <div className="relative">
-                    <p className="peer/shown">Default display</p>
-                    <p className="hidden peer-hover/shown:block absolute z-5 top-0 left-0 bg-neutral-950/75">Hidden display</p>
-                </div>
             </header>
             <Carousels />
         </div>
