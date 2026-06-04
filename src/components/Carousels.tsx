@@ -3,14 +3,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect, useRef, RefObject } from 'react';
-import Slider, { type Settings } from 'react-slick';
+import Slider, { type CarouselSettings } from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { usePopularMovies } from '@/hooks/usePopularMovies';
 import { usePopularShows } from '@/hooks/usePopularShows';
 
-export function MovieCarousel(settings?: { slider?: Settings; }) {
+import 'react-slick';
+
+export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
     const { response, loading, error } = usePopularMovies();
     
     const carouselSettings = typeof settings === 'undefined' || typeof settings.slider === 'undefined' ? {
@@ -53,7 +55,7 @@ export function MovieCarousel(settings?: { slider?: Settings; }) {
     );
 }
 
-export function ShowCarousel(settings?: { slider: Settings; }) {
+export function ShowCarousel(settings?: { slider: CarouselSettings; }) {
     const { response, loading, error } = usePopularShows();
     
     const carouselSettings = typeof settings === 'undefined' || typeof settings.slider === 'undefined' ? {
@@ -95,8 +97,8 @@ export function ShowCarousel(settings?: { slider: Settings; }) {
 }
 
 export default function Carousels() {
-    const [nav1, setNav1] = useState<RefObject<null> | null>(null);
-    const [nav2, setNav2] = useState<RefObject<null> | null>(null);
+    const [nav1, setNav1] = useState<RefObject<null> | undefined>(undefined);
+    const [nav2, setNav2] = useState<RefObject<null> | undefined>(undefined);
     let sliderRef1 = useRef(null);
     let sliderRef2 = useRef(null);
 
@@ -115,13 +117,13 @@ export default function Carousels() {
     }
     
     const slider1 = {
-        ...carouselSettings,
+        // ...carouselSettings,
         asNavFor: nav2,
         ref: (slider: RefObject<null>) => (sliderRef1 = slider)
     }
     
     const slider2 = {
-        ...carouselSettings,
+        // ...carouselSettings,
         asNavFor: nav1,
         ref: (slider: RefObject<null>) => (sliderRef2 = slider)
     }
