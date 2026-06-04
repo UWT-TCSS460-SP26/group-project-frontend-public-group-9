@@ -24,15 +24,3 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-
-/* .slick-slider .slick-prev {
-  left: 0;
-}
-
-.slick-slider .slick-next {
-  right: 0;
-}
-
-.slick-slider .slick-list {
-  padding: 0 25px;
-} */

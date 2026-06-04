@@ -32,7 +32,7 @@ export default async function BrowsePage() {
                     Nothing popular right now.
                 </p>
             ) : (
-                <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 px-3">
                     {data.results.map((movie) => (
                         <li key={movie.id}>
                             <Link

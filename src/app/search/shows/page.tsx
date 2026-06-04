@@ -2,6 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilm, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
 import { auth } from '@/lib/auth';
 import { partnerUrls, type ShowPage } from '@/lib/partnerApi';
 
@@ -32,14 +35,16 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         <>
             <div className="flex flex-row items-center justify-between w-full p-2 text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
                 <h1>
-                    Search shows
+                    <FontAwesomeIcon icon={faFilm} />
+                    <span> Search shows</span>
                 </h1>
                 <Link href="/search/movies" className="ml-auto px-3 hover:text-black hover:bg-zinc-200 dark:hover:text-white dark:hover:bg-zinc-800">
-                    Movies →
+                    <span>Movies </span>
+                    <FontAwesomeIcon icon={faArrowRight} />
                 </Link>
             </div>
 
-            <form action="/search/shows" method="GET" className="flex gap-2">
+            <form action="/search/shows" method="GET" className="flex gap-2 w-full">
                 <input
                     type="text"
                     name="q"

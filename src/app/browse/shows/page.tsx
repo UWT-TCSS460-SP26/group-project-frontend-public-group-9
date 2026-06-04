@@ -23,7 +23,7 @@ export default async function BrowsePage() {
                     Popular shows
                 </h1>
                 <Link href="/browse/movies" className="ml-auto px-3 hover:text-black hover:bg-zinc-200 dark:hover:text-white dark:hover:bg-zinc-800">
-                    Movies →
+                    <span>Movies </span>
                 </Link>
             </div>
 
@@ -32,7 +32,7 @@ export default async function BrowsePage() {
                     Nothing popular right now.
                 </p>
             ) : (
-                <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 px-3">
                     {data.results.map((show) => (
                         <li key={show.id}>
                             <Link

@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons'
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 export function SignInButton({ callbackUrl = '/' }: { callbackUrl?: string }) {
@@ -29,7 +31,8 @@ export function UserBadge() {
                 href="/profile"
                 className="px-3 py-3 text-lg font-medium text-zinc-700 hover:text-black dark:text-zinc-300 dark:hover:text-white dark:hover:bg-zinc-800"
             >
-                Profile
+                <FontAwesomeIcon icon={faCircleUser} />
+                <span className="hidden sm:inline"> Profile</span>
             </Link>
             <SignOutButton />
         </div>

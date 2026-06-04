@@ -16,14 +16,14 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
     const { response, loading, error } = usePopularMovies();
     
     const carouselSettings = typeof settings === 'undefined' || typeof settings.slider === 'undefined' ? {
-                dots: false,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-            }
-            : settings.slider;
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+    }
+    : settings.slider;
     
     return (
         <div>
@@ -31,18 +31,19 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
                 <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24">
                 </svg>
                 :
-                <Slider {...carouselSettings} className="w-100 mx-auto">
+                <Slider {...carouselSettings} className="w-40 sm:w-80 mx-7">
                     {response!.results.map((movie) => (
-                        <div className="relative">
+                        <div className="relative h-72 sm:h-128">
                             <Link href={`/movies/${movie.id}`}>
                                 <Image
                                     className="peer/poster"
                                     src={movie.posterUrl}
-                                    width={512}
-                                    height={768}
+                                    fill={true}
+                                    objectFit={"contain"}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     alt={movie.title + " poster"}
                                 />
-                                <div className="hidden peer-hover/poster:block absolute z-2 top-0 left-0 bg-neutral-950/75 p-2">
+                                <div className="hidden peer-hover/poster:block absolute z-2 top-2 left-0 bg-neutral-950/75 p-2">
                                     <h3 className="text-md font-bold">{movie.title}</h3>
                                     <p>&emsp;{movie.synopsis}</p>
                                 </div>
@@ -59,35 +60,38 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
     const { response, loading, error } = usePopularShows();
     
     const carouselSettings = typeof settings === 'undefined' || typeof settings.slider === 'undefined' ? {
-                dots: false,
-                infinite: true,
-                speed: 500,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-            }
-            : settings.slider;
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+    }
+    : settings.slider;
     
     return (
         <div>
-            {loading || error ? 
+            {loading || error ?
                 <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24">
                 </svg>
                 :
-                <Slider {...carouselSettings} className="w-100 mx-auto">
-                    {response!.results.map((movie) => (
-                        <div className="relative">
-                            <Image
-                                className="peer/poster"
-                                src={movie.posterUrl}
-                                width={512}
-                                height={768}
-                                alt={movie.title + " poster"}
-                            />
-                            <div className="hidden peer-hover/poster:block absolute z-2 top-0 left-0 bg-neutral-950/75 p-2">
-                                <h3 className="fs-2 fw-bold">{movie.title}</h3>
-                                <p>&emsp;{movie.synopsis}</p>
-                            </div>
+                <Slider {...carouselSettings} className="w-40 sm:w-80 mx-7">
+                    {response!.results.map((show) => (
+                        <div className="relative h-72 sm:h-128">
+                            <Link href={`/shows/${show.id}`}>
+                                <Image
+                                    className="peer/poster"
+                                    src={show.posterUrl}
+                                    fill={true}
+                                    objectFit={"contain"}
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    alt={show.title + " poster"}
+                                />
+                                <div className="hidden peer-hover/poster:block absolute z-2 top-2 left-0 bg-neutral-950/75 p-2">
+                                    <h3 className="text-md font-bold">{show.title}</h3>
+                                    <p>&emsp;{show.synopsis}</p>
+                                </div>
+                            </Link>
                         </div>
                     ))}
                 </Slider>
@@ -97,16 +101,6 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
 }
 
 export default function Carousels() {
-    const [nav1, setNav1] = useState<RefObject<null> | undefined>(undefined);
-    const [nav2, setNav2] = useState<RefObject<null> | undefined>(undefined);
-    let sliderRef1 = useRef(null);
-    let sliderRef2 = useRef(null);
-
-    useEffect(() => {
-        setNav1(sliderRef1);
-        setNav2(sliderRef2);
-    }, []);
-    
     const carouselSettings = {
         dots: false,
         infinite: true,
@@ -115,21 +109,8 @@ export default function Carousels() {
         slidesToScroll: 1,
         autoplay: true,
     }
-    
-    const slider1 = {
-        // ...carouselSettings,
-        asNavFor: nav2,
-        ref: (slider: RefObject<null>) => (sliderRef1 = slider)
-    }
-    
-    const slider2 = {
-        // ...carouselSettings,
-        asNavFor: nav1,
-        ref: (slider: RefObject<null>) => (sliderRef2 = slider)
-    }
-    
     return (
-        <div className="flex flex-auto flex-wrap mw-100 items-center justify-between">
+        <div className="flex flex-auto flex-wrap items-center justify-center">
             <MovieCarousel slider={carouselSettings} /> {/* no idea how to fix this. it works. */}
             <ShowCarousel slider={carouselSettings} />
         </div>
