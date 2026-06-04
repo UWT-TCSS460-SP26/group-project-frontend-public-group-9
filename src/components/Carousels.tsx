@@ -55,7 +55,7 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
     );
 }
 
-export function ShowCarousel(settings?: { slider: CarouselSettings; }) {
+export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
     const { response, loading, error } = usePopularShows();
     
     const carouselSettings = typeof settings === 'undefined' || typeof settings.slider === 'undefined' ? {
@@ -130,8 +130,8 @@ export default function Carousels() {
     
     return (
         <div className="flex flex-auto flex-wrap mw-100 items-center justify-between">
-            <MovieCarousel slider={slider1} /> {/* no idea how to fix this. it works. */}
-            <ShowCarousel slider={slider2} />
-        </div> 
+            <MovieCarousel slider={carouselSettings} /> {/* no idea how to fix this. it works. */}
+            <ShowCarousel slider={carouselSettings} />
+        </div>
     );
 }
