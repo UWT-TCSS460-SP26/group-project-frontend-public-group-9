@@ -4,7 +4,7 @@ import { UserBadge } from '@/components/AuthButtons';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faStar } from '@fortawesome/free-regular-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 import { useSession } from 'next-auth/react';
 import type { ReactNode } from 'react';
@@ -27,6 +27,10 @@ export default function PageShell({ children }: { children: ReactNode }) {
                 <Link href="/search" className="px-3 py-3 text-lg font-medium text-zinc-700 hover:text-black dark:text-zinc-300 dark:hover:text-white dark:hover:bg-zinc-800">
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                     <span className="hidden sm:inline"> Search</span>
+                </Link>
+                <Link href="/about" className="px-3 py-3 text-lg font-medium text-zinc-700 hover:text-black dark:text-zinc-300 dark:hover:text-white dark:hover:bg-zinc-800">
+                    <FontAwesomeIcon icon={faCircleInfo} />
+                    <span className="hidden sm:inline"> About</span>
                 </Link>
                 <UserBadge />
             </header>
