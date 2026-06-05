@@ -49,7 +49,12 @@ export default function AboutPage() {
                     />
                     <h3 className="text-lg text-center font-bold mt-2 mb-1">Riley Hopper</h3>
                     <p>
-                        &emsp;
+                        &emsp;Hi, I'm Riley, one of the developers on this site. On the
+                        front end, I built out the search, details, and popular pages.
+                        On the back end, I worked primarily on implementing the API
+                        endpoints. Honestly, almost everything in this course was new to
+                        me. Over the two parts I picked up building endpoints,
+                        authentication, hosting, React, and a lot more along the way.
                     </p>
                 </div>
             </div>
