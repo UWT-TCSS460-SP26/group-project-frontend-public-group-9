@@ -71,23 +71,23 @@ export default function AboutPage() {
             <h2 className="text-2xl text-center font-bold my-4">Credits</h2>
             <ul className="text-center">
                 <li>
-                    <Link href="https://tcss460-team-8-api.onrender.com/api-docs" className="text-blue-300">Group 8 </Link>
+                    <Link href="https://tcss460-team-8-api.onrender.com/api-docs" className="text-link">Group 8 </Link>
                     for our backend API.
                 </li>
                 <li>
-                    <Link href="https://tcss-460-iam.onrender.com/" className="text-blue-300">Auth<sup>2</sup> </Link>
+                    <Link href="https://tcss-460-iam.onrender.com/" className="text-link">Auth<sup>2</sup> </Link>
                     as our OAuth2 authentication service.
                 </li>
                 <li>
-                    <Link href="https://www.themoviedb.org/" className="text-blue-300">TMDB </Link>
+                    <Link href="https://www.themoviedb.org/" className="text-link">TMDB </Link>
                     for all the media metadata.
                 </li>
                 <li>
-                    <Link href="https://www.flaticon.com/authors/smashingstocks" className="text-blue-300">smashingstocks </Link>
+                    <Link href="https://www.flaticon.com/authors/smashingstocks" className="text-link">smashingstocks </Link>
                     for our site's favicon.
                 </li>
                 <li>
-                    <Link href="https://fontawesome.com/" className="text-blue-300">FontAwesome </Link>
+                    <Link href="https://fontawesome.com/" className="text-link">FontAwesome </Link>
                     for the rest of the icons on the site.
                 </li>
             </ul>
