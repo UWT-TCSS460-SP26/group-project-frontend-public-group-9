@@ -103,10 +103,10 @@ export default function RatingWidget({ mediaId, mediaType, summary: initSummary,
     return (
         <div className="flex flex-col gap-2">
             <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                <span className="text-sm font-medium">
                     Community rating:
                 </span>
-                <span className="text-sm text-zinc-900 dark:text-zinc-100">
+                <span className="text-sm">
                     {summary.average != null
                         ? `${summary.average.toFixed(1)} / 10 (${summary.count} ${summary.count === 1 ? 'rating' : 'ratings'})`
                         : 'No ratings yet'}
@@ -114,18 +114,18 @@ export default function RatingWidget({ mediaId, mediaType, summary: initSummary,
             </div>
 
             {status === 'loading' && (
-                <p className="text-sm text-zinc-500">Loading…</p>
+                <p className="text-sm">Loading…</p>
             )}
 
             {status === 'unauthenticated' && (
-                <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
+                <div className="flex items-center gap-2 text-sm">
                     <SignInButton /> to rate this title
                 </div>
             )}
 
             {status === 'authenticated' && !userRating && (
                 <div className="flex items-center gap-3">
-                    <label className="text-sm text-zinc-600 dark:text-zinc-400">Your score:</label>
+                    <label className="text-sm">Your score:</label>
                     <input
                         type="number"
                         min={1}
@@ -133,12 +133,12 @@ export default function RatingWidget({ mediaId, mediaType, summary: initSummary,
                         step={0.5}
                         value={score}
                         onChange={(e) => setScore(parseFloat(e.target.value))}
-                        className="w-20 rounded border border-zinc-300 bg-white px-2 py-1 text-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+                        className="w-20 rounded border border-background-less px-2 py-1 text-sm"
                     />
                     <button
                         onClick={submit}
                         disabled={busy}
-                        className="rounded bg-zinc-900 px-3 py-1 text-sm text-white hover:bg-zinc-700 disabled:opacity-50 dark:bg-zinc-100 dark:text-black dark:hover:bg-zinc-300"
+                        className="rounded px-3 py-1 text-sm bg-foreground text-background hover:bg-foreground-less disabled:opacity-50"
                     >
                         {busy ? 'Submitting…' : 'Submit rating'}
                     </button>
@@ -147,12 +147,12 @@ export default function RatingWidget({ mediaId, mediaType, summary: initSummary,
 
             {status === 'authenticated' && userRating && !editing && (
                 <div className="flex items-center gap-3">
-                    <span className="text-sm text-zinc-700 dark:text-zinc-300">
+                    <span className="text-sm">
                         Your rating: <strong>{userRating.score} / 10</strong>
                     </span>
                     <button
                         onClick={() => { setScore(userRating.score); setEditing(true); }}
-                        className="text-sm text-zinc-500 underline hover:text-black dark:hover:text-white"
+                        className="text-sm underline text-foreground-less hover:text-foreground"
                     >
                         Edit
                     </button>
@@ -168,7 +168,7 @@ export default function RatingWidget({ mediaId, mediaType, summary: initSummary,
 
             {status === 'authenticated' && editing && (
                 <div className="flex items-center gap-3">
-                    <label className="text-sm text-zinc-600 dark:text-zinc-400">New score:</label>
+                    <label className="text-sm">New score:</label>
                     <input
                         type="number"
                         min={1}
@@ -176,18 +176,18 @@ export default function RatingWidget({ mediaId, mediaType, summary: initSummary,
                         step={0.5}
                         value={score}
                         onChange={(e) => setScore(parseFloat(e.target.value))}
-                        className="w-20 rounded border border-zinc-300 bg-white px-2 py-1 text-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+                        className="w-20 rounded border border-background-less px-2 py-1 text-sm"
                     />
                     <button
                         onClick={update}
                         disabled={busy}
-                        className="rounded bg-zinc-900 px-3 py-1 text-sm text-white hover:bg-zinc-700 disabled:opacity-50 dark:bg-zinc-100 dark:text-black dark:hover:bg-zinc-300"
+                        className="rounded px-3 py-1 text-sm disabled:opacity-50"
                     >
                         {busy ? 'Saving…' : 'Save'}
                     </button>
                     <button
                         onClick={() => setEditing(false)}
-                        className="text-sm text-zinc-500 underline hover:text-black dark:hover:text-white"
+                        className="text-sm underline"
                     >
                         Cancel
                     </button>

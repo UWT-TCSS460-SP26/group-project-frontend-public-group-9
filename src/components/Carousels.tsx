@@ -28,7 +28,7 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
     return (
         <div>
             {loading || error ? 
-                <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24">
+                <svg className="m-auto size-5 animate-spin ..." viewBox="0 0 24 24">
                 </svg>
                 :
                 <Slider {...carouselSettings} className="w-40 sm:w-80 mx-7">
@@ -43,7 +43,7 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     alt={movie.title + " poster"}
                                 />
-                                <div className="hidden peer-hover/poster:block absolute z-2 top-2 left-0 bg-neutral-950/75 p-2">
+                                <div className="hidden peer-hover/poster:block hover:block absolute z-2 top-4 left-0 bg-foreground/75 p-2 text-background">
                                     <h3 className="text-md font-bold">{movie.title}</h3>
                                     <p>&emsp;{movie.synopsis}</p>
                                 </div>
@@ -72,7 +72,7 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
     return (
         <div>
             {loading || error ?
-                <svg className="mr-3 size-5 animate-spin ..." viewBox="0 0 24 24">
+                <svg className="m-auto size-5 animate-spin ..." viewBox="0 0 24 24">
                 </svg>
                 :
                 <Slider {...carouselSettings} className="w-40 sm:w-80 mx-7">
@@ -87,7 +87,7 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     alt={show.title + " poster"}
                                 />
-                                <div className="hidden peer-hover/poster:block absolute z-2 top-2 left-0 bg-neutral-950/75 p-2">
+                                <div className="hidden peer-hover/poster:block hover:block absolute z-2 top-4 left-0 bg-foreground/75 p-2 text-background">
                                     <h3 className="text-md font-bold">{show.title}</h3>
                                     <p>&emsp;{show.synopsis}</p>
                                 </div>

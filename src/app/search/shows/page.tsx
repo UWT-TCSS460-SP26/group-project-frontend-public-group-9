@@ -50,11 +50,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                     name="q"
                     defaultValue={query}
                     placeholder="e.g. breaking bad"
-                    className="flex-1 rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-black placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+                    className="flex-1 rounded border border-background-less px-3 py-2 text-sm placeholder:text-foreground-less focus:outline-none focus:ring-2 focus:ring-foreground-less"
                 />
                 <button
                     type="submit"
-                    className="rounded bg-black px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200"
+                    className="rounded bg-foreground text-background px-4 py-2 text-sm font-medium hover:bg-foreground-less"
                 >
                     Search
                 </button>
@@ -66,12 +66,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
             {data && (
                 <section className="flex flex-col gap-4">
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                    <p className="text-sm">
                         {data.pagination.totalResults} result
                         {data.pagination.totalResults === 1 ? '' : 's'} for &ldquo;{query}&rdquo;
                     </p>
                     {data.results.length === 0 ? (
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400">No matches.</p>
+                        <p className="text-sm">No matches.</p>
                     ) : (
                         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                             {data.results.map((show) => (
@@ -80,7 +80,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                                         href={`/shows/${show.id}`}
                                         className="group flex flex-col gap-2"
                                     >
-                                        <div className="relative aspect-[2/3] w-full overflow-hidden rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
+                                        <div className="relative aspect-[2/3] w-full overflow-hidden rounded border border-background-less">
                                             {show.posterUrl ? (
                                                 <Image
                                                     src={show.posterUrl}
@@ -90,17 +90,17 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                                                     className="object-cover transition-opacity group-hover:opacity-90"
                                                 />
                                             ) : (
-                                                <div className="flex h-full w-full items-center justify-center text-xs text-zinc-500">
+                                                <div className="flex h-full w-full items-center justify-center text-xs">
                                                     No poster
                                                 </div>
                                             )}
                                         </div>
                                         <div className="flex flex-col">
-                                            <span className="text-sm font-medium text-black group-hover:underline dark:text-zinc-50">
+                                            <span className="text-sm font-medium group-hover:underline">
                                                 {show.title}
                                             </span>
                                             {show.airDate && (
-                                                <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                                                <span className="text-xs">
                                                     {show.airDate.slice(0, 4)}
                                                 </span>
                                             )}

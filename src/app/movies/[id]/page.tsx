@@ -13,7 +13,6 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
     const { id } = await params;
     const session = await auth();
     const token = session?.accessToken;
-    const authHeader: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
 
     const [movieRes, ratingRes, reviewsRes] = await Promise.all([
         fetch(partnerUrls.movieDetails(id), { cache: 'no-store' }),
@@ -23,7 +22,7 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
 
     if (movieRes.status === 404) {
         return (
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm">
                 No movie found with id {id}.
             </p>
         );
@@ -66,7 +65,7 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
     return (
         <article className="flex flex-col gap-8 p-2 sm:p-4">
             <div className="flex flex-col gap-8 sm:flex-row sm:items-start">
-                <div className="relative aspect-[2/3] w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
+                <div className="relative aspect-[2/3] w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded border border-background-less">
                     {movie.posterUrl ? (
                         <Image
                             src={movie.posterUrl}
@@ -77,7 +76,7 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
                             className="object-cover"
                         />
                     ) : (
-                        <div className="flex h-full w-full items-center justify-center text-xs text-zinc-500">
+                        <div className="flex h-full w-full items-center justify-center text-xs">
                             No poster
                         </div>
                     )}
@@ -85,18 +84,18 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
 
                 <div className="flex flex-col gap-4">
                     <header className="flex flex-col gap-1">
-                        <h1 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
+                        <h1 className="text-3xl font-semibold tracking-tight">
                             {movie.title}
                         </h1>
                         {movie.releaseDate && (
-                            <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                            <p className="text-sm">
                                 Released {movie.releaseDate}
                             </p>
                         )}
                     </header>
 
                     {movie.synopsis && (
-                        <p className="text-base leading-7 text-zinc-700 dark:text-zinc-300">
+                        <p className="text-base leading-7 text-foreground-less">
                             {movie.synopsis}
                         </p>
                     )}

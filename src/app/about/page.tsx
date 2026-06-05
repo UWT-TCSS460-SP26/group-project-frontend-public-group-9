@@ -4,7 +4,7 @@ import Image from 'next/image';
 export default function AboutPage() {
     return (
         <>
-        <div>
+        <div className="p-4 rounded-md">
             <h2 className="text-2xl text-center font-bold my-6">The Team</h2>
             <div className="flex flex-wrap justify-center">
                 <div className="mx-4 w-72">
@@ -59,11 +59,11 @@ export default function AboutPage() {
             <h2 className="text-2xl text-center font-bold my-4">Credits</h2>
             <ul className="text-center">
                 <li>
-                    <Link href="https://www.flaticon.com/authors/smashingstocks" className="text-blue-300">smashingstocks </Link>
+                    <Link href="https://www.flaticon.com/authors/smashingstocks" className="text-link">smashingstocks </Link>
                     for our site's favicon.
                 </li>
                 <li>
-                    <Link href="https://fontawesome.com/" className="text-blue-300">FontAwesome </Link>
+                    <Link href="https://fontawesome.com/" className="text-link">FontAwesome </Link>
                     for the rest of the icons on the site.
                 </li>
             </ul>
