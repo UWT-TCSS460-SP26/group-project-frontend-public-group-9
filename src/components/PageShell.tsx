@@ -20,19 +20,19 @@ export default function PageShell({ children }: { children: ReactNode }) {
             <Link href="#content" className="not-focus:sr-only focus:block absolute top-2 left-2 text-lg bg-background-less p-2 rounded">Skip to main content</Link>
             <ScrollToTop />
             <header className="flex items-center justify-between w-full max-w-5xl mx-auto px-6 py-2 border-b border-background-less text-foreground">
-                <Link href="/" className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
+                <Link aria-label="Home" href="/" className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
                     <FontAwesomeIcon icon={faHouse} />
                     <span className="hidden sm:inline"> Home</span>
                 </Link>
-                <Link href="/browse" className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
+                <Link aria-label="Browse" href="/browse" className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
                     <FontAwesomeIcon icon={faStar} />
                     <span className="hidden sm:inline"> Browse</span>
                 </Link>
-                <Link href="/search" className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
+                <Link aria-label="Search" href="/search" className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                     <span className="hidden sm:inline"> Search</span>
                 </Link>
-                <Link href="/about" className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
+                <Link aria-label="About" href="/about" className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
                     <FontAwesomeIcon icon={faCircleInfo} />
                     <span className="hidden sm:inline"> About</span>
                 </Link>
