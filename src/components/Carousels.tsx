@@ -109,12 +109,12 @@ export default function Carousels() {
         // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getAutoplayPolicy
         // @ts-ignore
         isAutoplayEnabled = navigator.getAutoplayPolicy('mediaelement') as string == 'allowed'
-    } else if ('AudioContext' in window) {
+    } else if (typeof window !== 'undefined' && 'AudioContext' in window) {
         // More universal implementation (who??)
         // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
         const context = new window.AudioContext();
         isAutoplayEnabled = context.state == 'running';
-    } else if ('webkitAudioContext' in window) {
+    } else if (typeof window !== 'undefined' && 'webkitAudioContext' in window) {
         // Webkit implementation
         // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
         // @ts-ignore
