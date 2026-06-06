@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "G9 Frontend",
+  title: "Group 9 Frontend",
   description: "TCSS460 Group 9 Movie Frontend",
   icons: {
     icon: '/favicon.png',
