@@ -35,12 +35,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
     return (
         <>
-            <div className="flex flex-row items-center justify-between w-full text-2xl font-semibold tracking-tight">
+            <div className="flex flex-row items-center justify-between w-full text-2xl font-semibold tracking-tight my-2">
                 <h1>
                     <FontAwesomeIcon icon={faClapperboard} />
                     <span> Search movies</span>
                 </h1>
-                <Link href="/search/shows" className="ml-auto px-3 hover:bg-background-less">
+                <Link href="/search/shows" className="ml-auto px-3 hover:bg-background-less rounded">
                     <span>Shows </span>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </Link>

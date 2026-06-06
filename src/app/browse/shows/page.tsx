@@ -23,12 +23,12 @@ export default async function BrowsePage() {
 
     return (
         <>
-            <div className="flex flex-row items-center justify-between w-full text-2xl font-semibold tracking-tight">
+            <div className="flex flex-row items-center justify-between w-full text-2xl font-semibold tracking-tight my-2">
                 <h1>
                     <FontAwesomeIcon icon={faClapperboard} />
                     <span> Popular shows</span>
                 </h1>
-                <Link href="/browse/movies" className="ml-auto px-3 hover:bg-background-less">
+                <Link href="/browse/movies" className="ml-auto px-3 hover:bg-background-less rounded">
                     <span>Movies </span>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </Link>
