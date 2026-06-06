@@ -75,6 +75,9 @@ export default function AboutPage() {
                 development we used the companion tool for generating authentication tokens to test
                 on our own backend API.
             </p>
+            <p className="text-center font-bold text-lg my-3">
+                <Link href="https://github.com/UWT-TCSS460-SP26/group-project-frontend-public-group-9" className="text-link hover:underline">Frontend Source</Link>&emsp; | &emsp;<Link href="https://github.com/UWT-TCSS460-SP26/group-project-backend-group-8" className="text-link hover:underline">Backend Source</Link>
+            </p>
             <hr className="my-6" />
             <h2 className="text-2xl text-center font-bold my-4">Credits</h2>
             <ul className="text-center">
