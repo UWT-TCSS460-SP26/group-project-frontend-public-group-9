@@ -18,7 +18,11 @@ export default function AboutPage() {
                     />
                     <h3 className="text-lg text-center font-bold mt-2 mb-1">Saeed Esparza</h3>
                     <p>
-                        &emsp;
+                        &emsp;Hi, I'm Saeed, one of the developers on this site. On the
+                        frontend, I built the rating and review system, including submission,
+                        editing, and deletion on the movie and show detail pages. I also built
+                        the user profile page where users can see all their ratings and reviews,
+                        and did a design pass to make the app look more consistent.
                     </p>
                 </div>
                 <div className="m-4 w-3/4 lg:w-72">
