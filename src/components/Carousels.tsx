@@ -39,7 +39,7 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
                                 <Image
                                     className="peer/poster w-full h-auto"
                                     src={movie.posterUrl}
-                                    loading="eager"
+                                    loading="lazy"
                                     width={512}
                                     height={768}
                                     alt={movie.title + " poster"}
@@ -84,7 +84,7 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
                                 <Image
                                     className="peer/poster w-full h-auto"
                                     src={show.posterUrl}
-                                    loading="eager"
+                                    loading="lazy"
                                     width={512}
                                     height={768}
                                     alt={show.title + " poster"}
