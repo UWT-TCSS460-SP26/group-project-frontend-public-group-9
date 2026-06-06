@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Metadata } from 'next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { partnerUrls, type ShowPage } from '@/lib/partnerApi';
+
+export const metadata: Metadata = {
+  title: 'Browse Shows',
+}
 
 export default async function BrowsePage() {
     const response = await fetch(partnerUrls.popularShows(), {
@@ -18,7 +23,7 @@ export default async function BrowsePage() {
 
     return (
         <>
-            <div className="flex flex-row items-center justify-between w-full p-2 text-2xl font-semibold tracking-tight">
+            <div className="flex flex-row items-center justify-between w-full text-2xl font-semibold tracking-tight">
                 <h1>
                     <FontAwesomeIcon icon={faClapperboard} />
                     <span> Popular shows</span>

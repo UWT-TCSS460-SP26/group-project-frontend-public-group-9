@@ -8,7 +8,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 
 export function SignInButton({ callbackUrl = usePathname() }: { callbackUrl?: string }) {
     return (
-        <button className="px-3 py-3 hover:bg-background-less" onClick={() => signIn('tcss460', { callbackUrl })}>
+        <button className="px-3 py-3 hover:bg-background-less hover:cursor-pointer" onClick={() => signIn('tcss460', { callbackUrl })}>
             Sign in
         </button>
     );
@@ -16,7 +16,7 @@ export function SignInButton({ callbackUrl = usePathname() }: { callbackUrl?: st
 
 export function SignOutButton() {
     return (
-        <button className="px-3 py-3 hover:bg-background-less" onClick={() => signOut({ callbackUrl: '/' })}>
+        <button className="px-3 py-3 hover:bg-background-less hover:cursor-pointer" onClick={() => signOut({ callbackUrl: '/' })}>
             Sign out
         </button>
     );

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Swap dark mode check to use a CSS class instead of prefers-color-scheme */
-/* @custom-variant dark (&:where(.dark, .dark *)); */
+@custom-variant dark (&:where(.light, .light *));
 
 :root {
   --background: #ffffff;
@@ -31,8 +31,12 @@
   }
 }
 
-@media (prefers-color-scheme: light) {
-  
+.light {
+  --background: #ffffff;
+  --background-less: #dddddd;
+  --foreground: #171717;
+  --foreground-less: #252525;
+  --link: var(--color-blue-500);
 }
 
 body {

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import type { Metadata, ResolvingMetadata } from 'next'
 
 import { auth } from '@/lib/auth';
 import { partnerUrls, type MovieSummary, type Rating, type Review, type RatingSummary } from '@/lib/partnerApi';
@@ -8,6 +9,30 @@ import ReviewSection from '@/components/ReviewSection';
 type DetailsPageProps = {
     params: Promise<{ id: string }>;
 };
+
+type Props = {
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+ 
+export async function generateMetadata(
+        { params, searchParams }: Props,
+        parent: ResolvingMetadata
+    ): Promise<Metadata> {
+        
+    const { id } = (await params);
+    const movieRes = await fetch(partnerUrls.movieDetails(id), { cache: 'no-store' }).then((res) => res.json());
+    
+    if (movieRes.status === 404) {
+        return {
+            title: 'No movie',
+        }
+    }
+    
+    return {
+        title: movieRes.title,
+    }
+}
 
 export default async function MovieDetailsPage({ params }: DetailsPageProps) {
     const { id } = await params;
@@ -63,7 +88,7 @@ export default async function MovieDetailsPage({ params }: DetailsPageProps) {
     }
 
     return (
-        <article className="flex flex-col gap-8 p-2 sm:p-4">
+        <article className="flex flex-col gap-8 sm:p-4">
             <div className="flex flex-col gap-8 sm:flex-row sm:items-start">
                 <div className="relative aspect-[2/3] w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded border border-background-less">
                     {movie.posterUrl ? (

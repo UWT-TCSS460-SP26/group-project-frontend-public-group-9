@@ -1,10 +1,15 @@
 import Link from 'next/link';
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/lib/auth';
 import { partnerUrls, type Rating, type Review } from '@/lib/partnerApi';
 
 type MediaDetails = { title: string; posterUrl: string | null };
+
+export const metadata: Metadata = {
+  title: 'Profile',
+}
 
 function formatDate(iso: string) {
     return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
@@ -45,7 +50,7 @@ export default async function ProfilePage() {
     const detailsMap = new Map<string, MediaDetails>(detailsEntries.filter(Boolean) as [string, MediaDetails][]);
 
     return (
-        <div className="flex flex-col gap-10 w-full px-2 sm:p-4">
+        <div className="flex flex-col gap-10 w-full sm:p-4">
             <header className="flex flex-col gap-1">
                 <h1 className="text-3xl font-semibold tracking-tight">
                     Your profile

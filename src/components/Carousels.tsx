@@ -18,7 +18,8 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
     const carouselSettings = typeof settings === 'undefined' || typeof settings.slider === 'undefined' ? {
         dots: false,
         infinite: true,
-        speed: 500,
+        speed: 1500,
+        autoplaySpeed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
@@ -34,12 +35,11 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
                 <Slider {...carouselSettings} className="w-40 sm:w-80 mx-7">
                     {response!.results.map((movie) => (
                         <div className="relative h-72 sm:h-128">
-                            <Link href={`/movies/${movie.id}`}>
+                            <Link className="h-72 sm:h-128" href={`/movies/${movie.id}`}>
                                 <Image
                                     className="peer/poster"
                                     src={movie.posterUrl}
                                     fill={true}
-                                    objectFit={"contain"}
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     alt={movie.title + " poster"}
                                 />
@@ -62,7 +62,8 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
     const carouselSettings = typeof settings === 'undefined' || typeof settings.slider === 'undefined' ? {
         dots: false,
         infinite: true,
-        speed: 500,
+        speed: 1500,
+        autoplaySpeed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
@@ -78,12 +79,11 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
                 <Slider {...carouselSettings} className="w-40 sm:w-80 mx-7">
                     {response!.results.map((show) => (
                         <div className="relative h-72 sm:h-128">
-                            <Link href={`/shows/${show.id}`}>
+                            <Link className="h-72 sm:h-128" href={`/shows/${show.id}`}>
                                 <Image
                                     className="peer/poster"
                                     src={show.posterUrl}
                                     fill={true}
-                                    objectFit={"contain"}
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     alt={show.title + " poster"}
                                 />
@@ -101,14 +101,37 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
 }
 
 export default function Carousels() {
+    // Need to check if autoplay is enabled for each browser implementation
+    // Default to off for accessibility
+    let isAutoplayEnabled = false;
+    if ('getAutoplayPolicy' in navigator) {
+        // Firefox implementation
+        // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getAutoplayPolicy
+        // @ts-ignore
+        isAutoplayEnabled = navigator.getAutoplayPolicy('mediaelement') as string == 'allowed'
+    } else if ('AudioContext' in window) {
+        // More universal implementation (who??)
+        // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
+        const context = new window.AudioContext();
+        isAutoplayEnabled = context.state == 'running';
+    } else if ('webkitAudioContext' in window) {
+        // Webkit implementation
+        // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
+        // @ts-ignore
+        const context = new window.webkitAudioContext();
+        isAutoplayEnabled = context.state == 'running';
+    }
+    
     const carouselSettings = {
         dots: false,
         infinite: true,
-        speed: 500,
+        speed: 1500,
+        autoplaySpeed: 4500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: isAutoplayEnabled,
     }
+
     return (
         <div className="flex flex-auto flex-wrap items-center justify-center">
             <MovieCarousel slider={carouselSettings} /> {/* no idea how to fix this. it works. */}

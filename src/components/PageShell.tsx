@@ -39,7 +39,7 @@ export default function PageShell({ children }: { children: ReactNode }) {
                 <UserBadge />
                 <DarkModeToggle />
             </header>
-            <main id="content" className="flex flex-col items-center justify-center flex-1 max-w-5xl mx-auto my-5 bg-background text-foreground font-sans">
+            <main id="content" className="flex flex-col items-center justify-center flex-1 max-w-5xl mx-auto my-5 bg-background text-foreground font-sans px-2">
                 { children }
             </main>
         </section>

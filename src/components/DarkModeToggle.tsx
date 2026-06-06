@@ -4,29 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
 
 export default function DarkModeToggle() {
-  const [isDark, setIsDark] = useState(true);
+    function setIsDark(isDark: boolean) {
+        console.log("Setting dark to", isDark);
+        console.log(document.getElementsByTagName('body')[0])
+        document.getElementsByTagName('body')[0].classList.toggle('light')
+        console.log(document.getElementsByTagName('body')[0])
+    }
 
-  const systemPrefersDark = useMediaQuery({
-        query: "(prefers-color-scheme: dark)",
-    },
-    undefined,
-    (isSystemDark) => setIsDark(isSystemDark)
-  );
-
-  return (
-    <div className="px-3 py-3 text-lg font-medium hover:text-foreground-less hover:bg-background-less">
-        <button className="block dark:hidden" onClick={() => console.log("guh")}>
-            <FontAwesomeIcon icon={faSun} />
-        </button>
-        <button className="hidden dark:block" onClick={() => console.log("weh")}>
-            <FontAwesomeIcon icon={faMoon} />
-        </button>
-    </div>
-    // <Toggle
-    //   checked={isDark}
-    //   onChange={({ target }) => setIsDark(target.checked)}
-    //   icons={{ checked: "🌙", unchecked: "🔆" }}
-    //   aria-label="Dark mode toggle"
-    // />
-  );
+    return (
+        <div>
+            <button aria-label="Toggle dark mode off" className="block dark:hidden px-3 py-3 text-lg font-medium hover:cursor-pointer hover:text-foreground-less hover:bg-background-less" onClick={() => setIsDark(false)}>
+                <FontAwesomeIcon icon={faSun} />
+            </button>
+            <button aria-label="Toggle dark mode on" className="hidden dark:block px-3 py-3 text-lg font-medium hover:cursor-pointer hover:text-foreground-less hover:bg-background-less" onClick={() => setIsDark(true)}>
+                <FontAwesomeIcon icon={faMoon} />
+            </button>
+        </div>
+    );
 };

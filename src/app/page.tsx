@@ -1,5 +1,9 @@
-import Link from 'next/link';
-import Carousels, { MovieCarousel } from '@/components/Carousels';
+import type { Metadata } from 'next'
+import Carousels from '@/components/Carousels';
+
+export const metadata: Metadata = {
+  title: 'Group 9 Frontend',
+}
 
 export default function Home() {
     return (

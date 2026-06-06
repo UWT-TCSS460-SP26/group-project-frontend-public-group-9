@@ -1,15 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import type { Metadata } from 'next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClapperboard, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import { auth } from '@/lib/auth';
 import { partnerUrls, type MoviePage } from '@/lib/partnerApi';
 
 type SearchPageProps = {
     searchParams: Promise<{ q?: string }>;
 };
+
+export const metadata: Metadata = {
+  title: 'Search Movies',
+}
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
     const { q } = await searchParams;
@@ -32,7 +35,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
     return (
         <>
-            <div className="flex flex-row items-center justify-between w-full p-2 text-2xl font-semibold tracking-tight">
+            <div className="flex flex-row items-center justify-between w-full text-2xl font-semibold tracking-tight">
                 <h1>
                     <FontAwesomeIcon icon={faClapperboard} />
                     <span> Search movies</span>
