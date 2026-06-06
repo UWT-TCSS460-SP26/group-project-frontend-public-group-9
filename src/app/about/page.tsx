@@ -13,6 +13,7 @@ export default function AboutPage() {
                         alt="Saeed's Github profile picture"
                         width={288}
                         height={288}
+                        loading="eager"
                         className="mx-auto"
                     />
                     <h3 className="text-lg text-center font-bold mt-2 mb-1">Saeed Esparza</h3>
@@ -26,6 +27,7 @@ export default function AboutPage() {
                         alt="Raiden's Github profile picture"
                         width={288}
                         height={288}
+                        loading="eager"
                         className="mx-auto"
                     />
                     <h3 className="text-lg text-center font-bold mt-2 mb-1">Raiden Hiland</h3>
@@ -45,6 +47,7 @@ export default function AboutPage() {
                         alt="Riley's Github profile picture"
                         width={288}
                         height={288}
+                        loading="eager"
                         className="mx-auto"
                     />
                     <h3 className="text-lg text-center font-bold mt-2 mb-1">Riley Hopper</h3>
