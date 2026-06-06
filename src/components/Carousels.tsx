@@ -39,6 +39,7 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
                                 <Image
                                     className="peer/poster"
                                     src={movie.posterUrl}
+                                    loading="eager"
                                     fill={true}
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     alt={movie.title + " poster"}
@@ -83,6 +84,7 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
                                 <Image
                                     className="peer/poster"
                                     src={show.posterUrl}
+                                    loading="eager"
                                     fill={true}
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                     alt={show.title + " poster"}
