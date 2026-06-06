@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import type { Metadata } from 'next'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClapperboard, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import { auth } from '@/lib/auth';
 import { partnerUrls, type ShowPage } from '@/lib/partnerApi';
+
+export const metadata: Metadata = {
+  title: 'Browse Shows',
+}
 
 export default async function BrowsePage() {
     const response = await fetch(partnerUrls.popularShows(), {
@@ -18,17 +23,19 @@ export default async function BrowsePage() {
 
     return (
         <>
-            <div className="flex flex-row items-center justify-between w-full p-2 text-2xl font-semibold tracking-tight text-black dark:text-zinc-50">
+            <div className="flex flex-row items-center justify-between w-full text-2xl font-semibold tracking-tight">
                 <h1>
-                    Popular shows
+                    <FontAwesomeIcon icon={faClapperboard} />
+                    <span> Popular shows</span>
                 </h1>
-                <Link href="/browse/movies" className="ml-auto px-3 hover:text-black hover:bg-zinc-200 dark:hover:text-white dark:hover:bg-zinc-800">
+                <Link href="/browse/movies" className="ml-auto px-3 hover:bg-background-less">
                     <span>Movies </span>
+                    <FontAwesomeIcon icon={faArrowRight} />
                 </Link>
             </div>
 
             {data.results.length === 0 ? (
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm">
                     Nothing popular right now.
                 </p>
             ) : (
@@ -39,7 +46,7 @@ export default async function BrowsePage() {
                                 href={`/shows/${show.id}`}
                                 className="group flex flex-col gap-2"
                             >
-                                <div className="relative aspect-[2/3] w-full overflow-hidden rounded border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
+                                <div className="relative aspect-[2/3] w-full overflow-hidden rounded border border-background-less">
                                     {show.posterUrl ? (
                                         <Image
                                             src={show.posterUrl}
@@ -49,17 +56,17 @@ export default async function BrowsePage() {
                                             className="object-cover transition-opacity group-hover:opacity-90"
                                         />
                                     ) : (
-                                        <div className="flex h-full w-full items-center justify-center text-xs text-zinc-500">
+                                        <div className="flex h-full w-full items-center justify-center text-xs text-foreground-less">
                                             No poster
                                         </div>
                                     )}
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-sm font-medium text-black group-hover:underline dark:text-zinc-50">
+                                    <span className="text-sm font-medium group-hover:underline">
                                         {show.title}
                                     </span>
                                     {show.airDate && (
-                                        <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                                        <span className="text-xs text-foreground-less">
                                             {show.airDate.slice(0, 4)}
                                         </span>
                                     )}
