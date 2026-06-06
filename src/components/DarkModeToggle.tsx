@@ -5,10 +5,7 @@ import { faSun, faMoon } from '@fortawesome/free-regular-svg-icons';
 
 export default function DarkModeToggle() {
     function setIsDark(isDark: boolean) {
-        console.log("Setting dark to", isDark);
-        console.log(document.getElementsByTagName('body')[0])
         document.getElementsByTagName('body')[0].classList.toggle('light')
-        console.log(document.getElementsByTagName('body')[0])
     }
 
     return (

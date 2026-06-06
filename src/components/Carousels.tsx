@@ -37,14 +37,14 @@ export function MovieCarousel(settings?: { slider?: CarouselSettings; }) {
                         <div className="relative h-72 sm:h-128">
                             <Link className="h-72 sm:h-128" href={`/movies/${movie.id}`}>
                                 <Image
-                                    className="peer/poster"
+                                    className="peer/poster w-full h-auto"
                                     src={movie.posterUrl}
                                     loading="eager"
-                                    fill={true}
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    width={512}
+                                    height={768}
                                     alt={movie.title + " poster"}
                                 />
-                                <div className="hidden peer-hover/poster:block hover:block absolute z-2 top-4 left-0 bg-foreground/75 p-2 text-background">
+                                <div className="hidden peer-hover/poster:block hover:block absolute z-2 top-0 left-0 bg-foreground/75 p-2 text-background">
                                     <h3 className="text-md font-bold">{movie.title}</h3>
                                     <p>&emsp;{movie.synopsis}</p>
                                 </div>
@@ -82,14 +82,14 @@ export function ShowCarousel(settings?: { slider?: CarouselSettings; }) {
                         <div className="relative h-72 sm:h-128">
                             <Link className="h-72 sm:h-128" href={`/shows/${show.id}`}>
                                 <Image
-                                    className="peer/poster"
+                                    className="peer/poster w-full h-auto"
                                     src={show.posterUrl}
                                     loading="eager"
-                                    fill={true}
-                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    width={512}
+                                    height={768}
                                     alt={show.title + " poster"}
                                 />
-                                <div className="hidden peer-hover/poster:block hover:block absolute z-2 top-4 left-0 bg-foreground/75 p-2 text-background">
+                                <div className="hidden peer-hover/poster:block hover:block absolute z-2 top-0 left-0 bg-foreground/75 p-2 text-background">
                                     <h3 className="text-md font-bold">{show.title}</h3>
                                     <p>&emsp;{show.synopsis}</p>
                                 </div>
