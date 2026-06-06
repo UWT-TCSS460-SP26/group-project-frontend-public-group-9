@@ -51,7 +51,7 @@ export default async function BrowsePage() {
                                         <Image
                                             src={movie.posterUrl}
                                             alt={`${movie.title} poster`}
-                                            fetchPriority="high"
+                                            preload={true}
                                             loading="eager"
                                             fill
                                             sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, 50vw"
