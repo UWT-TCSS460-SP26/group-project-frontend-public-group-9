@@ -113,6 +113,19 @@ with text 200% larger than default.
 
 ### Findings
 
+Lighthouse before: https://pagespeed.web.dev/analysis/https-tcss460-g9-vercel-app/nk9527vvxd?form_factor=desktop
+
+Lighthouse after: https://pagespeed.web.dev/analysis/https-tcss460-g9-vercel-app/6nwihtz9nf?form_factor=desktop
+
+Our report showed a pretty bad drop in performance, a drop which is
+massively dominated by the images we load from TMDB. This issue could
+be fixed by loading properly sized images, but unfortunately our upstream
+partner does not have any size parameters when getting images. We don't
+believe there is another fix for this issue, and have done our best to
+optimize our images with what we have available.
+
+#### Accessibility
+
 1) Homepage carousel image size
 
 The homepage carousels took some work to make the image size responsive.
@@ -135,10 +148,23 @@ hid the text leaving only the icons. We also took the opportunity to
 spread some more icons around in sensible places, like the search pages,
 to make the current page's purpose more quickly identifiable.
 
----
+#### Performance
 
-Our Lighthouse audit came back with perfect performance, so we didn't have
-any areas to improve there, likely due to how simple the app is.
+Our initial Lighthouse report returned perfect performance, but we found a
+couple things anyways.
+
+1) Lazy loading images
+
+On some pages where we have images, we load them lazily so the user can
+interact with the page without having to wait for images to load.
+
+2) Responsive images
+
+Our images should always be responsive to the size of the screen.
+
+3) High priority images
+
+Images in the LCP are given a high fetch priority to improve LCP performance.
 
 ### What Went Well
 
